@@ -1,6 +1,6 @@
 .menu{
     height: 100vh;
-    background-color: rgb(41, 41, 41);
+    background-color: var(--color-bg-secondary);
     position: fixed;
     right: 0;
     top: 0;
@@ -22,19 +22,42 @@
             margin-top: 80px;
 
             .header{
-                color: rgb(153, 153, 153);
-                border-bottom: 1px solid rgb(153, 153, 153);
+                color: var(--color-text-muted);
+                border-bottom: 1px solid var(--color-border);
                 text-transform: uppercase;
                 font-size: 11px;
+                letter-spacing: 2px;
                 margin-bottom: 40px;
+                font-family: var(--font-body);
             }
 
             a{
                 text-decoration: none;
                 color: white;
                 font-weight: 300;
+                font-family: var(--font-heading);
             }
-            
+
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .menu{
+        width: 100% !important;
+
+        .body{
+            padding: 60px 40px;
+
+            .nav{
+                font-size: 36px;
+                gap: 8px;
+                margin-top: 60px;
+
+                .header{
+                    margin-bottom: 24px;
+                }
+            }
         }
     }
 }

@@ -9,6 +9,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Rounded from "../../common/RoundedButton";
 import Magnetic from "../../common/Magnetic";
 
+const scrollToSection = (id) => {
+  if (id === "home") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 export default function Index() {
   const header = useRef(null);
   const [isActive, setIsActive] = useState(false);
@@ -47,30 +56,34 @@ export default function Index() {
   return (
     <>
       <div ref={header} className={styles.header}>
-        {/* <div className={styles.logo}>
-                <p className={styles.copyright}>©</p>
-                <div className={styles.name}>
-                    <p className={styles.codeBy}>Code by</p>
-                    <p className={styles.dennis}>Dennis</p>
-                    <p className={styles.snellenberg}>Snellenberg</p>
-                </div>
-            </div> */}
+        <div
+          className={styles.logo}
+          onClick={() => scrollToSection("home")}
+        >
+          <p>&copy; Avis Media</p>
+        </div>
         <div className={styles.nav}>
           <Magnetic>
             <div className={styles.el}>
-              <a>Work</a>
+              <a onClick={() => scrollToSection("services")}>Services</a>
               <div className={styles.indicator}></div>
             </div>
           </Magnetic>
           <Magnetic>
             <div className={styles.el}>
-              <a>About</a>
+              <a onClick={() => scrollToSection("work")}>Work</a>
               <div className={styles.indicator}></div>
             </div>
           </Magnetic>
           <Magnetic>
             <div className={styles.el}>
-              <a>Contact</a>
+              <a onClick={() => scrollToSection("about")}>About</a>
+              <div className={styles.indicator}></div>
+            </div>
+          </Magnetic>
+          <Magnetic>
+            <div className={styles.el}>
+              <a onClick={() => scrollToSection("contact")}>Contact</a>
               <div className={styles.indicator}></div>
             </div>
           </Magnetic>
@@ -90,7 +103,9 @@ export default function Index() {
           ></div>
         </Rounded>
       </div>
-      <AnimatePresence mode="wait">{isActive && <Nav />}</AnimatePresence>
+      <AnimatePresence mode="wait">
+        {isActive && <Nav closeMenu={() => setIsActive(false)} />}
+      </AnimatePresence>
     </>
   );
 }

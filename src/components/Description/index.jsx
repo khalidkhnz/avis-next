@@ -2,14 +2,14 @@ import styles from "./style.module.scss";
 import { useInView, motion } from "framer-motion";
 import { useRef } from "react";
 import { slideUp, opacity } from "./animation";
-import Rounded from "../../common/RoundedButton";
+
 export default function Index() {
   const phrase =
-    "APCO’s public affairs heritage and shared passion for issues is at the core of our strategic mindset.";
+    "Avis Media is a premier digital PR and video licensing agency bridging high-impact content with global reach.";
   const description = useRef(null);
   const isInView = useInView(description);
   return (
-    <div ref={description} className={styles.description}>
+    <div id="about" ref={description} className={styles.description}>
       <div className={styles.body}>
         <p>
           {phrase.split(" ").map((word, index) => {
@@ -28,17 +28,12 @@ export default function Index() {
           })}
         </p>
         <motion.p variants={opacity} animate={isInView ? "open" : "closed"}>
-          We work with our clients to help them tell their stories through
-          authentic voices of allies and partners to create action and authentic
-          change in the world. Our deep bench of experts and partners from major
-          business, financial, political and media capitals understand advocacy
-          and gets results.
+          We specialize in video licensing, strategic digital PR, and content
+          protection — empowering creators, broadcasters, and brands by securing
+          their intellectual property while maximizing their digital footprint
+          through strategic storytelling. Content is the currency of the digital
+          age, and we deliver the results that matter.
         </motion.p>
-        <div data-scroll data-scroll-speed={0.1}>
-          <Rounded className={styles.button}>
-            <p>About us</p>
-          </Rounded>
-        </div>
       </div>
     </div>
   );

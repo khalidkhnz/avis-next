@@ -1,32 +1,26 @@
 'use client';
 import styles from './style.module.scss'
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Project from './components/project';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import Image from 'next/image';
 import Rounded from '../../common/RoundedButton';
 
 const projects = [
   {
-    title: "C2 Montreal",
-    src: "c2montreal.png",
-    color: "#000000"
+    title: "Video Licensing",
+    description: "From rights acquisition to global distribution, we manage the full lifecycle of viral and professional video content across all major platforms."
   },
   {
-    title: "Office Studio",
-    src: "officestudio.png",
-    color: "#8C8C8C"
+    title: "Digital PR Campaigns",
+    description: "Data-driven campaigns that enhance brand reputation, secure top-tier media placements, and drive meaningful engagement."
   },
   {
-    title: "Locomotive",
-    src: "locomotive.png",
-    color: "#EFE8D3"
+    title: "Content Protection",
+    description: "We safeguard your digital assets, ensuring creative work is used legally and remains a revenue-generating asset."
   },
   {
-    title: "Silencio",
-    src: "silencio.png",
-    color: "#706D63"
+    title: "Brand Growth Strategy",
+    description: "Combining the visual power of video with earned media credibility to scale your online presence and reach the right audience."
   }
 ]
 
@@ -40,75 +34,45 @@ export default function Home() {
 
   const [modal, setModal] = useState({active: false, index: 0})
   const { active, index } = modal;
-  const modalContainer = useRef(null);
-  const cursor = useRef(null);
-  const cursorLabel = useRef(null);
 
-  let xMoveContainer = useRef(null);
-  let yMoveContainer = useRef(null);
-  let xMoveCursor = useRef(null);
-  let yMoveCursor = useRef(null);
-  let xMoveCursorLabel = useRef(null);
-  let yMoveCursorLabel = useRef(null);
-
-  useEffect( () => {
-    //Move Container
-    xMoveContainer.current = gsap.quickTo(modalContainer.current, "left", {duration: 0.8, ease: "power3"})
-    yMoveContainer.current = gsap.quickTo(modalContainer.current, "top", {duration: 0.8, ease: "power3"})
-    //Move cursor
-    xMoveCursor.current = gsap.quickTo(cursor.current, "left", {duration: 0.5, ease: "power3"})
-    yMoveCursor.current = gsap.quickTo(cursor.current, "top", {duration: 0.5, ease: "power3"})
-    //Move cursor label
-    xMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "left", {duration: 0.45, ease: "power3"})
-    yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "top", {duration: 0.45, ease: "power3"})
-  }, [])
-
-  const moveItems = (x, y) => {
-    xMoveContainer.current(x)
-    yMoveContainer.current(y)
-    xMoveCursor.current(x)
-    yMoveCursor.current(y)
-    xMoveCursorLabel.current(x)
-    yMoveCursorLabel.current(y)
-  }
-  const manageModal = (active, index, x, y) => {
-    moveItems(x, y)
+  const manageModal = (active, index) => {
     setModal({active, index})
   }
 
   return (
-  <main onMouseMove={(e) => {moveItems(e.clientX, e.clientY)}} className={styles.projects}>
+  <section id="work" className={styles.projects}>
+    <div className={styles.sectionHeader}>
+      <p className={styles.label}>Our Expertise</p>
+      <h2>What We Do</h2>
+    </div>
     <div className={styles.body}>
       {
-        projects.map( (project, index) => {
-          return <Project index={index} title={project.title} manageModal={manageModal} key={index}/>
+        projects.map( (project, i) => {
+          return <Project index={i} title={project.title} description={project.description} manageModal={manageModal} key={i}/>
         })
       }
     </div>
-    <Rounded>
-      <p>More work</p>
+    <Rounded
+      onClick={() => {
+        const el = document.getElementById("contact");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }}
+    >
+      <p>Get in touch</p>
     </Rounded>
-    <>
-        <motion.div ref={modalContainer} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"} className={styles.modalContainer}>
-            <div style={{top: index * -100 + "%"}} className={styles.modalSlider}>
-            {
-                projects.map( (project, index) => {
-                const { src, color } = project
-                return <div className={styles.modal} style={{backgroundColor: color}} key={`modal_${index}`}>
-                    <Image 
-                    src={`/images/${src}`}
-                    width={300}
-                    height={0}
-                    alt="image"
-                    />
-                </div>
-                })
-            }
-            </div>
-        </motion.div>
-        <motion.div ref={cursor} className={styles.cursor} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}></motion.div>
-        <motion.div ref={cursorLabel} className={styles.cursorLabel} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>View</motion.div>
-    </>
-  </main>
+    <motion.div variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"} className={styles.modalContainer}>
+        <div style={{top: index * -100 + "%"}} className={styles.modalSlider}>
+        {
+            projects.map( (project, i) => {
+            return (
+              <div className={styles.modal} key={`modal_${i}`}>
+                <p>{project.description}</p>
+              </div>
+            )
+            })
+        }
+        </div>
+    </motion.div>
+  </section>
   )
 }

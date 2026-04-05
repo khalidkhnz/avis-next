@@ -2,8 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg: #0a0a0b;
+  --color-bg-secondary: #111113;
+  --color-accent: #6366f1;
+  --color-accent-hover: #818cf8;
+  --color-text: #fafafa;
+  --color-text-muted: #a1a1aa;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0px;
-  overflow-x: hidden; /* Hide scrollbars */
+  overflow-x: hidden;
   cursor: wait;
+  font-family: var(--font-body), system-ui, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), system-ui, sans-serif;
 }

@@ -6,7 +6,7 @@ import Magnetic from "../Magnetic";
 
 export default function Index({
   children,
-  backgroundColor = "#455CE9",
+  backgroundColor = "#6366f1",
   ...attributes
 }) {
   const circle = useRef(null);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./style.module.scss";
 import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 import { menuSlide } from "../animation";
 import Link from "./Link";
 import Curve from "./Curve";
@@ -10,25 +9,28 @@ import Footer from "./Footer";
 const navItems = [
   {
     title: "Home",
-    href: "/",
+    href: "home",
+  },
+  {
+    title: "Services",
+    href: "services",
   },
   {
     title: "Work",
-    href: "/work",
+    href: "work",
   },
   {
     title: "About",
-    href: "/about",
+    href: "about",
   },
   {
     title: "Contact",
-    href: "/contact",
+    href: "contact",
   },
 ];
 
-export default function Index() {
-  const pathname = usePathname();
-  const [selectedIndicator, setSelectedIndicator] = useState(pathname);
+export default function Index({ closeMenu }) {
+  const [selectedIndicator, setSelectedIndicator] = useState("home");
 
   return (
     <motion.div
@@ -41,7 +43,7 @@ export default function Index() {
       <div className={styles.body}>
         <div
           onMouseLeave={() => {
-            setSelectedIndicator(pathname);
+            setSelectedIndicator("home");
           }}
           className={styles.nav}
         >
@@ -55,6 +57,7 @@ export default function Index() {
                 data={{ ...data, index }}
                 isActive={selectedIndicator == data.href}
                 setSelectedIndicator={setSelectedIndicator}
+                closeMenu={closeMenu}
               ></Link>
             );
           })}

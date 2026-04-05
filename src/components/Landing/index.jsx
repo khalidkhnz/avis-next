@@ -40,21 +40,22 @@ export default function Home() {
   };
 
   return (
-    <motion.main
+    <motion.section
+      id="home"
       variants={slideUp}
       initial="initial"
       animate="enter"
       className="relative w-full"
     >
-      <div className="absolute w-full h-full flex items-end ">
-        <h1 className="text-white m-6">Avis Media 2024</h1>
+      <div className="absolute w-full h-full flex items-end">
+        <h1 className="text-white m-6 text-4xl font-light">Avis Media</h1>
       </div>
       <div className="w-full h-full">
-        <video autoPlay loop muted className="w-full h-full">
+        <video autoPlay loop muted playsInline className="w-full h-full">
           <source src="/landing.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
-    </motion.main>
+    </motion.section>
   );
 }

@@ -1,19 +1,20 @@
 .contact{
-    color: white;
+    color: var(--color-text);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #141516;
+    background-color: var(--color-bg);
     position: relative;
+    margin-top: 600px;
     .body{
         padding-top: 200px;
         width: 100%;
         max-width: 1800px;
-        background-color: #141516;
+        background-color: var(--color-bg);
 
         .title{
-            border-bottom: 1px solid rgb(134, 134, 134);
+            border-bottom: 1px solid var(--color-border-hover);
             padding-bottom: 100px;
             margin-left: 200px;
             margin-right: 200px;
@@ -21,17 +22,6 @@
             span{
                 display: flex;
                 align-items: center;
-                .imageContainer{
-                    width: 100px;
-                    height: 100px;
-                    position: relative;
-                    border-radius: 50%;
-                    overflow: hidden;
-
-                    img{
-                        object-fit: cover;
-                    }
-                }
                 h2{
                     margin-left: 0.3em;
                 }
@@ -43,13 +33,13 @@
             }
             .buttonContainer{
                 position: absolute;
-                left: calc(100% - 400px); 
+                left: calc(100% - 400px);
                 top: calc(100% - 75px);
             }
             .button{
                 width: 180px;
                 height: 180px;
-                background-color: #455CE9;
+                background-color: var(--color-accent);
                 color: white;
                 border-radius: 50%;
                 position: absolute;
@@ -80,51 +70,71 @@
         }
         .info{
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 200px;
             padding: 20px;
             div{
                 display: flex;
                 gap: 10px;
                 align-items: flex-end;
-                p, h3{
+                p{
                     margin: 0px;
                     padding: 2.5px;
-                    cursor: pointer;
-                }
-                p{
-                    &::after{
-                        content: "";
-                        width: 0%;
-                        height: 1px;
-                        background-color: white;
-                        display: block;
-                        margin-top: 2px;
-                        position: relative;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        transition: width 0.2s linear;
-                    }
-                    &:hover{
-                        &::after{
-                            width: 100%;
-                        }
-                    }
+                    color: var(--color-text-muted);
+                    font-weight: 300;
+                    font-size: 14px;
                 }
                 span{
                     display: flex;
                     flex-direction: column;
                     gap: 15px;
                 }
-                h3{
-                    color: grey;
-                    cursor: default;
-                    font-weight: 300;
-                    font-size: 1em;
-                }
             }
-            
+
         }
     }
-    
+
+}
+
+@media (max-width: 768px) {
+    .contact{
+        margin-top: 400px;
+        .body{
+            padding-top: 100px;
+
+            .title{
+                margin-left: 30px;
+                margin-right: 30px;
+                padding-bottom: 60px;
+
+                h2{
+                    font-size: 10vw;
+                }
+                .buttonContainer{
+                    position: relative;
+                    left: auto;
+                    top: auto;
+                    margin-top: 40px;
+                }
+                .button{
+                    position: relative;
+                    width: 140px;
+                    height: 140px;
+                }
+                svg{
+                    display: none;
+                }
+            }
+            .nav{
+                flex-direction: column;
+                margin-left: 30px;
+                margin-right: 30px;
+                margin-top: 60px;
+                gap: 12px;
+            }
+            .info{
+                margin-top: 80px;
+            }
+        }
+    }
 }

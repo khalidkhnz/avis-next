@@ -1,9 +1,7 @@
 import styles from "./style.module.scss";
-import Image from "next/image";
 import Rounded from "../../common/RoundedButton";
 import { useRef } from "react";
-import { useScroll, motion, useTransform, useSpring } from "framer-motion";
-import Magnetic from "../../common/Magnetic";
+import { useScroll, motion, useTransform } from "framer-motion";
 
 export default function Index() {
   const container = useRef(null);
@@ -15,22 +13,21 @@ export default function Index() {
   const y = useTransform(scrollYProgress, [0, 1], [-500, 0]);
   const rotate = useTransform(scrollYProgress, [0, 1], [120, 90]);
   return (
-    <motion.div style={{ y }} ref={container} className={styles.contact}>
+    <motion.div id="contact" style={{ y }} ref={container} className={styles.contact}>
       <div className={styles.body}>
         <div className={styles.title}>
           <span>
-            {/* <div className={styles.imageContainer}>
-                            <Image 
-                            fill={true}
-                            alt={"image"}
-                            src={`/images/background.jpg`}
-                            />
-                        </div> */}
             <h2>{`Let's work`}</h2>
           </span>
           <h2>together</h2>
           <motion.div style={{ x }} className={styles.buttonContainer}>
-            <Rounded backgroundColor={"#334BD3"} className={styles.button}>
+            <Rounded
+              backgroundColor={"#6366f1"}
+              className={styles.button}
+              onClick={() => {
+                window.location.href = "mailto:info@avismedia.com";
+              }}
+            >
               <p>Get in touch</p>
             </Rounded>
           </motion.div>
@@ -53,37 +50,15 @@ export default function Index() {
             <p>info@avismedia.com</p>
           </Rounded>
           <Rounded>
-            <p>+91 8770 xxx xxx</p>
+            <p>+91 99119 69967</p>
           </Rounded>
         </div>
         <div className={styles.info}>
           <div>
             <span>
-              {/* <h3>Version</h3> */}
-              {/* <p>2022 © Edition</p> */}
-            </span>
-            <span>
-              {/* <h3>Version</h3> */}
-              {/* <p>11:49 PM GMT+2</p> */}
+              <p>2025 &copy; Avis Media</p>
             </span>
           </div>
-          {/* <div>
-            <span>
-              <h3>socials</h3>
-              <Magnetic>
-                <p>Awwwards</p>
-              </Magnetic>
-            </span>
-            <Magnetic>
-              <p>Instagram</p>
-            </Magnetic>
-            <Magnetic>
-              <p>Dribbble</p>
-            </Magnetic>
-            <Magnetic>
-              <p>Linkedin</p>
-            </Magnetic>
-          </div> */}
         </div>
       </div>
     </motion.div>
